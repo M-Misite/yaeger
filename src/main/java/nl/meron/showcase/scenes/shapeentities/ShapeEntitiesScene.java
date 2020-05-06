@@ -44,16 +44,24 @@ public class ShapeEntitiesScene extends ShowCaseScene {
         var timedDynamicRectangle = new TimedDynamicRectangle(new Location(40, 260));
         addEntity(timedDynamicRectangle);
 
-        var circle = new StaticCircle(new Location(150, 560));
+        var circle = new StaticCircle(new Location(260, 560));
+        circle.setFill(Color.SILVER);
         addEntity(circle);
+
         EntitySupplier entitySupplier = this.getEntitySupplier();
+        HashMap<YaegerEntity, Double> circleDistancesToOthers = circle.getDistanceToEntities(entitySupplier);
+        HashMap<YaegerEntity, Double> circleAnglesToOthers = circle.getAngleBetweenEntities(entitySupplier);
 
-        HashMap<YaegerEntity, Double> circleDistances = circle.getDistanceToEntities(entitySupplier);
-
-        var distanceText = new TextEntity(new Location(300, 60), "Circle Distance to Rectangle:  " + circleDistances.get(rect));
-        distanceText.setFont(new Font("Serif", 18));
+        var distanceText = new TextEntity(new Location(300, 60), "Circle Distance to Rectangle:  " +  Math.round(circleDistancesToOthers.get(rect)));
+        distanceText.setFont(new Font("Serif", 40));
         distanceText.setFill(Color.SNOW);
         addEntity(distanceText);
+
+        var angleText = new TextEntity(new Location(300, 120), "Circle Angle to Rectangle:  " + Math.round(circleAnglesToOthers.get(rect)));
+        angleText.setFont(new Font("Serif", 40));
+        angleText.setFill(Color.SNOW);
+        System.out.println(entitySupplier.g;
+        addEntity(angleText);
     }
 
     @Override
