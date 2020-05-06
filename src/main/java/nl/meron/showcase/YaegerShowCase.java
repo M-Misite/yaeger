@@ -19,8 +19,8 @@ import nl.meron.yaeger.engine.YaegerApplication;
 public class YaegerShowCase extends YaegerApplication {
 
     private static final String GAME_TITLE = "Yaeger Show Case";
-    private static final int WIDTH = 1919;
-    private static final int HEIGHT = 1079;
+    private static final int WIDTH = 1600;
+    private static final int HEIGHT = 900;
 
     public static final int SCENE_SELECTION = 1;
     public static final int SCENE_TEXT_ENTITIES = 2;

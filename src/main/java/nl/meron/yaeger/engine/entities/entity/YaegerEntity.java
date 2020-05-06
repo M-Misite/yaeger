@@ -7,9 +7,10 @@ import nl.meron.yaeger.engine.Activatable;
 import nl.meron.yaeger.engine.Initializable;
 import nl.meron.yaeger.engine.Timer;
 import nl.meron.yaeger.engine.TimerListProvider;
+import nl.meron.yaeger.engine.entities.EntitySupplier;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.awt.geom.Point2D;
+import java.util.*;
 
 /**
  * A {@link YaegerEntity} can be used to display anything that is a child of a {@link javafx.scene.Node}.
@@ -82,6 +83,15 @@ public abstract class YaegerEntity implements Initializable, Activatable, TimerL
         }, () -> this.opacity = opacity);
     }
 
+    public HashMap<YaegerEntity, Double> getDistanceToEntities(EntitySupplier listOfEntities) {
+        HashMap<YaegerEntity, Double> mapOfDistances = new HashMap<>();
+        listOfEntities.forEach((entity) -> mapOfDistances.put(entity, this.getDistanceToSingleEntity(entity)));
+        return mapOfDistances;
+    }
+
+    public double getDistanceToSingleEntity(YaegerEntity entity) {
+        return Point2D.distance(this.initialX, this.initialY, entity.initialX, entity.initialY);
+    }
 
     @Override
     public List<Timer> getTimers() {
