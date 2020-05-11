@@ -60,7 +60,6 @@ public class ShapeEntitiesScene extends ShowCaseScene {
         var angleText = new TextEntity(new Location(300, 120), "Circle Angle to Rectangle:  " + Math.round(circleAnglesToOthers.get(rect)));
         angleText.setFont(new Font("Serif", 40));
         angleText.setFill(Color.SNOW);
-        System.out.println(entitySupplier.g;
         addEntity(angleText);
     }
 
