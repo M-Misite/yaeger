@@ -5,12 +5,9 @@ import javafx.scene.text.Font;
 import nl.meron.showcase.YaegerShowCase;
 import nl.meron.showcase.buttons.Back;
 import nl.meron.showcase.scenes.ShowCaseScene;
-import nl.meron.showcase.scenes.shapeentities.entities.DynamicRectangle;
-import nl.meron.showcase.scenes.shapeentities.entities.StaticCircle;
-import nl.meron.showcase.scenes.shapeentities.entities.StaticRectangle;
-import nl.meron.showcase.scenes.shapeentities.entities.TimedDynamicRectangle;
 import nl.meron.yaeger.engine.entities.EntityCollection;
 import nl.meron.yaeger.engine.entities.EntitySupplier;
+import nl.meron.showcase.scenes.shapeentities.entities.*;
 import nl.meron.yaeger.engine.entities.entity.Location;
 import nl.meron.yaeger.engine.entities.entity.YaegerEntity;
 import nl.meron.yaeger.engine.entities.entity.shape.text.TextEntity;
@@ -61,6 +58,8 @@ public class ShapeEntitiesScene extends ShowCaseScene {
         angleText.setFont(new Font("Serif", 40));
         angleText.setFill(Color.SNOW);
         addEntity(angleText);
+        var ellipse = new StaticEllipse(new Location(400, 560));
+        addEntity(ellipse);
     }
 
     @Override
