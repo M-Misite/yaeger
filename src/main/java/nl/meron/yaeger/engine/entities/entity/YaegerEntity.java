@@ -7,8 +7,11 @@ import nl.meron.yaeger.engine.Activatable;
 import nl.meron.yaeger.engine.Initializable;
 import nl.meron.yaeger.engine.Timer;
 import nl.meron.yaeger.engine.TimerListProvider;
+import nl.meron.yaeger.engine.entities.EntitySupplier;
 
-import java.util.ArrayList;
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -82,6 +85,25 @@ public abstract class YaegerEntity implements Initializable, Activatable, TimerL
         }, () -> this.opacity = opacity);
     }
 
+    public HashMap<YaegerEntity, Double> getDistanceToEntities(EntitySupplier listOfEntities) {
+        HashMap<YaegerEntity, Double> mapOfDistances = new HashMap<>();
+        listOfEntities.forEach((entity) -> mapOfDistances.put(entity, this.getDistanceToSingleEntity(entity)));
+        return mapOfDistances;
+    }
+
+    public HashMap<YaegerEntity, Double> getAngleBetweenEntities(EntitySupplier listOfEntities) {
+        HashMap<YaegerEntity, Double> mapOfAngles = new HashMap<>();
+        listOfEntities.forEach((entity) -> mapOfAngles.put(entity, this.getAngleToSingleEntity(entity)));
+        return mapOfAngles;
+    }
+
+    public double getDistanceToSingleEntity(YaegerEntity entity) {
+        return Point2D.distance(this.initialX, this.initialY, entity.initialX, entity.initialY);
+    }
+
+    public double getAngleToSingleEntity(YaegerEntity entity) {
+        return Math.toDegrees(Math.atan2(this.initialX - entity.initialX, this.initialY - entity.initialY));
+    }
 
     @Override
     public List<Timer> getTimers() {

@@ -1,10 +1,18 @@
 package nl.meron.showcase.scenes.shapeentities;
 
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import nl.meron.showcase.YaegerShowCase;
 import nl.meron.showcase.buttons.Back;
 import nl.meron.showcase.scenes.ShowCaseScene;
+import nl.meron.yaeger.engine.entities.EntityCollection;
+import nl.meron.yaeger.engine.entities.EntitySupplier;
 import nl.meron.showcase.scenes.shapeentities.entities.*;
 import nl.meron.yaeger.engine.entities.entity.Location;
+import nl.meron.yaeger.engine.entities.entity.YaegerEntity;
+import nl.meron.yaeger.engine.entities.entity.shape.text.TextEntity;
+
+import java.util.HashMap;
 
 public class ShapeEntitiesScene extends ShowCaseScene {
 
@@ -21,7 +29,7 @@ public class ShapeEntitiesScene extends ShowCaseScene {
 
     @Override
     public void setupEntities() {
-        var backButton = new Back(showCase, new Location(20, getHeight() - 70));
+        var backButton = new Back(showCase, new Location(40, getHeight() - 80));
         addEntity(backButton);
 
         var rect = new StaticRectangle(new Location(40, 60));
@@ -33,9 +41,23 @@ public class ShapeEntitiesScene extends ShowCaseScene {
         var timedDynamicRectangle = new TimedDynamicRectangle(new Location(40, 260));
         addEntity(timedDynamicRectangle);
 
-        var circle = new StaticCircle(new Location(150, 560));
+        var circle = new StaticCircle(new Location(260, 560));
+        circle.setFill(Color.SILVER);
         addEntity(circle);
 
+        EntitySupplier entitySupplier = this.getEntitySupplier();
+        HashMap<YaegerEntity, Double> circleDistancesToOthers = circle.getDistanceToEntities(entitySupplier);
+        HashMap<YaegerEntity, Double> circleAnglesToOthers = circle.getAngleBetweenEntities(entitySupplier);
+
+        var distanceText = new TextEntity(new Location(300, 60), "Circle Distance to Rectangle:  " +  Math.round(circleDistancesToOthers.get(rect)));
+        distanceText.setFont(new Font("Serif", 40));
+        distanceText.setFill(Color.SNOW);
+        addEntity(distanceText);
+
+        var angleText = new TextEntity(new Location(300, 120), "Circle Angle to Rectangle:  " + Math.round(circleAnglesToOthers.get(rect)));
+        angleText.setFont(new Font("Serif", 40));
+        angleText.setFill(Color.SNOW);
+        addEntity(angleText);
         var ellipse = new StaticEllipse(new Location(400, 560));
         addEntity(ellipse);
     }
